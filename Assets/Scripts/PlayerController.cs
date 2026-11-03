@@ -11,14 +11,16 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         float yMoveValue = 0f;
+        // se jump for vedadeiro e se o input do eixo do Jump for igual a 0 o "Player"  poderar saltar
         if(jump == true && !(Input.GetAxis("Jump") == 0))
-        {
+        {//jumpalturaatual será igual a transform.position.y + jumpaltura. É o limite de altura do player
             jumpalturaatual = transform.position.y + jumpaltura;
             jump = false;
         }
 
         if(transform.position.y < jumpalturaatual)
-        {
+        {   //caso se transform.position.y menor jumpalturaatual irá receber o imput do "Jump"
+
             yMoveValue = Input.GetAxis("Jump") * Time.deltaTime * speed;
         }
         float xMoveValue = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
