@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpaltura;
+    private float jumpalturaatual = 0;
 
     private bool jump = true;
     private void MovePlayer()
@@ -12,11 +13,14 @@ public class PlayerController : MonoBehaviour
         float yMoveValue = 0f;
         if(jump == true && !(Input.GetAxis("Jump") == 0))
         {
-            yMoveValue = Input.GetAxis("Jump") * Time.deltaTime * jumpaltura;
+            jumpalturaatual = transform.position.y + jumpaltura;
             jump = false;
-            Debug.Log("pulou");
         }
 
+        if(transform.position.y < jumpalturaatual)
+        {
+            yMoveValue = Input.GetAxis("Jump") * Time.deltaTime * speed;
+        }
         float xMoveValue = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float zMovevalue = Input.GetAxis("Vertical") * Time.deltaTime * speed;
         //this function have the objetive for the moviment the player controller
